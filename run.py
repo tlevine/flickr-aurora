@@ -30,4 +30,23 @@ def download(group_id, page):
 
 def parse(text):
     rsp = fromstring(text.encode('utf-8'))
-    return []
+
+    # Check for errors.
+    stat = rsp.xpath('@stat')[0]
+    if stat != 'ok':
+        raise ValueError(stat)
+
+    page = int(rsp.xpath('//photos/page')[0])
+    photos = []
+    for i, photo in enumerate(rsp.xpath('//photo')):
+        photos.append({
+            'page': page,
+            'within_page': i + 1,
+            'id': photo.xpath('@id')[0],
+            'owner': photo.xpath('@owner')[0],
+            'title': photo.xpath('@title')[0],
+            'ownername': photo.xpath('@ownername')[0],
+            'dateadded': datetime.datetime.fromtimestamp(photo.xpath('@dateadded')[0]),
+        })
+
+    return photos
