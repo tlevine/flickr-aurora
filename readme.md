@@ -8,4 +8,8 @@ current auroras.
     # export FLICKR_SECRET=123abc...
 
     # Download
-    ./download
+    ./run
+
+Test the parser
+
+    nosetests2

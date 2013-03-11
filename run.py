@@ -30,3 +30,4 @@ def download(group_id, page):
 
 def parse(text):
     rsp = fromstring(text.encode('utf-8'))
+    return []
