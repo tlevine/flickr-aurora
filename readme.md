@@ -12,6 +12,9 @@ current auroras.
     # Download
     ./run
 
+    # Generate csv
+    sqlite3 aurora.db -csv -header 'SELECT * FROM aurora;'
+
 Test the parser
 
     nosetests2
