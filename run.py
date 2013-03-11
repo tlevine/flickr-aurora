@@ -15,7 +15,7 @@ def p(**special_params):
     result.update(special_params)
     return result
 
-def page(group_id, page):
+def download(group_id, page):
     '''
     Return a page of the photo pool for a group.
     Find the `group_id` here: http://idgettr.com.
@@ -26,4 +26,7 @@ def page(group_id, page):
         print r.text
         raise ValueError(r.status_code)
 
-    return fromstring(r.text.encode('utf-8'))
+    return r.text
+
+def parse(text):
+    rsp = fromstring(text.encode('utf-8'))

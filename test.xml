@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rsp stat="ok">
+<photos page="7" pages="3617" perpage="3" total="10849">
+	<photo id="8541981221" owner="63130627@N07" secret="6492d86e98" server="8511" farm="9" title="Aurora_Coming @^_^@!" ispublic="1" isfriend="0" isfamily="0" ownername="noomplayboy" dateadded="1362860132" />
+	<photo id="8541904081" owner="63130627@N07" secret="ed4d0dfab1" server="8522" farm="9" title="Aurora_Dancing @ Iceland" ispublic="1" isfriend="0" isfamily="0" ownername="noomplayboy" dateadded="1362858321" />
+	<photo id="8541845647" owner="35612079@N08" secret="181081e098" server="8247" farm="9" title="View from my house II" ispublic="1" isfriend="0" isfamily="0" ownername="Norseman1968" dateadded="1362856667" />
+</photos>
+</rsp>
