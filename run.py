@@ -58,11 +58,11 @@ def parse(text):
 
         datetakens = photo.xpath('@datetaken')
         if len(datetakens) == 1:
-            photo_data['datetaken'] = datetime.datetime.strptime(datetakens[0], "%Y-%m-%d %H:%M:%S"),
+            photo_data['datetaken'] = datetime.datetime.strptime(datetakens[0], "%Y-%m-%d %H:%M:%S")
 
         dateuploadeds = photo.xpath('@dateuploaded')
         if len(dateuploadeds) == 1:
-            photo_data['dateuploaded'] = datetime.datetime.fromtimestamp(int(dateuploadeds[0])),
+            photo_data['dateuploaded'] = datetime.datetime.fromtimestamp(int(dateuploadeds[0]))
 
         photo_data['url_sq'] = photo.attrib.get('url_sq', '')
         photo_data['url_l'] = photo.attrib.get('url_l', '')
