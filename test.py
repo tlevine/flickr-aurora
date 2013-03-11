@@ -11,15 +11,18 @@ expected_data = [
         'id': '8541981221',
         'owner': '63130627@N07',
         'title': 'Aurora_Coming @^_^@!',
-        'ownername': 'noomplayboy',
         'dateadded': datetime.datetime.fromtimestamp(1362860132),
+  datetaken DATETIME NOT NULL,
+  description TEXT NOT NULL,
+  url_l TEXT NOT NULL,
+  longitude REAL NOT NULL,
+  latitude REAL NOT NULL,
     },
     {
         'page': 7, 'within_page': 2,
 	    'id': '8541904081',
         'owner': '63130627@N07',
         'title': 'Aurora_Dancing @ Iceland',
-        'ownername': 'noomplayboy',
         'dateadded': datetime.datetime.fromtimestamp(1362858321),
     },
     {
@@ -27,7 +30,6 @@ expected_data = [
         'id': '8541845647',
         'owner': '35612079@N08',
         'title': 'View from my house II',
-        'ownername': 'Norseman1968',
         'dateadded': datetime.datetime.fromtimestamp(1362856667),
     }
 ]

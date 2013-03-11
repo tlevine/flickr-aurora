@@ -12,7 +12,8 @@ def p(**special_params):
     result = {
         'method': 'flickr.groups.pools.getPhotos',
         'api_key': os.environ['FLICKR_KEY'],
-        'per_page': 3, #100,
+        'per_page': 100,
+        'extras': 'description,url_l,longitude,latitude',
     }
     result.update(special_params)
     return result
@@ -41,15 +42,38 @@ def parse(text):
     page = int(rsp.xpath('//photos/@page')[0])
     photos = []
     for i, photo in enumerate(rsp.xpath('//photo')):
-        photos.append({
+        descriptions = photo.xpath('description')
+        description_text = descriptions[0].xpath('string()') if len(descriptions) == 1 else ''
+
+        photo_data = {
             'page': page,
             'within_page': i + 1,
             'id': photo.xpath('@id')[0],
             'owner': photo.xpath('@owner')[0],
             'title': photo.xpath('@title')[0],
-            'ownername': photo.xpath('@ownername')[0],
             'dateadded': datetime.datetime.fromtimestamp(int(photo.xpath('@dateadded')[0])),
-        })
+
+            'description': description_text,
+        }
+
+        datetakens = photo.xpath('@datetaken')
+        if len(datetakens) == 1:
+            photo_data['datetaken'] = datetime.datetime.strptime(datetakens[0], "%Y-%m-%d %H:%M:%S"),
+
+        dateuploadeds = photo.xpath('@dateuploaded')
+        if len(dateuploadeds) == 1:
+            photo_data['dateuploaded'] = datetime.datetime.fromtimestamp(int(dateuploadeds[0])),
+
+        photo_data['url_sq'] = photo.attrib.get('url_sq', '')
+        photo_data['url_l'] = photo.attrib.get('url_l', '')
+        photo_data['longitude'] = float(photo.attrib.get('longitude', 0))
+        photo_data['latitude'] = float(photo.attrib.get('latitude', 0))
+
+        for key in ['longitude', 'latitude']:
+            if photo_data[key] == 0.0:
+                del(photo_data[key])
+
+        photos.append(photo_data)
 
     return photos
 
