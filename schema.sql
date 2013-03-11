@@ -25,11 +25,11 @@ CREATE VIEW aurora AS SELECT
   url_l AS 'url',
   'http://www.flickr.com/photos/' || owner || '/' || id AS 'photostream_url',
   'http://www.flickr.com/people/' || owner AS 'owner_url',
-  datetaken,
+--datetaken,
   dateadded,
-  dateuploaded,
+--dateuploaded,
   title,
-  description,
-  longitude,
-  latitude
+  description
+--longitude,
+--latitude
 FROM photo;
