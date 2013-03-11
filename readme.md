@@ -5,7 +5,6 @@ current auroras.
 
     # Set your credentials
     export FLICKR_KEY=12345abcde...
-    # export FLICKR_SECRET=123abc...
 
     # Download
     ./run
