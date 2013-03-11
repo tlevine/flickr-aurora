@@ -13,7 +13,7 @@ def p(**special_params):
         'method': 'flickr.groups.pools.getPhotos',
         'api_key': os.environ['FLICKR_KEY'],
         'per_page': 100,
-        'extras': 'description,url_l,longitude,latitude',
+        'extras': 'description,url_l,geo,date_taken,date_uploaded',
     }
     result.update(special_params)
     return result
