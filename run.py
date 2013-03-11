@@ -3,6 +3,7 @@ import os
 import datetime
 from requests import get
 from lxml.etree import fromstring
+from dumptruck import DumpTruck
 
 FLICKR_REST = 'http://api.flickr.com/services/rest/'
 GROUPS = ['40371529@N00']
@@ -54,9 +55,6 @@ def parse(text):
 
 def group(dt, group_id, verbose = False):
     'Download a group.'
-    if not os.path.isdir(group):
-        os.mkdir(group)
-
     n_pages = 1
     n_page = 1
     while n_page <= n_pages:
@@ -71,7 +69,7 @@ def group(dt, group_id, verbose = False):
         dt.insert(data, 'photo')
 
         # Continue
-        photos = fromstring(text).xpath('//photos')[0]
+        photos = fromstring(text.encode('utf-8')).xpath('//photos')[0]
         n_page = int(photos.xpath('@page')[0])
         n_pages = int(photos.xpath('@pages')[0])
         if verbose:
@@ -80,11 +78,9 @@ def group(dt, group_id, verbose = False):
 
 
 def main():
-    # Make directories.
-    dt = DumpTruck(dbname = 'aurora.db')
-    for group_id in groups:
-        group(dt, group_id)
-
+    dt = DumpTruck(dbname = 'aurora.db', adapt_and_convert = True)
+    for group_id in GROUPS:
+        group(dt, group_id, verbose = True)
 
 if __name__ == '__main__':
     main()

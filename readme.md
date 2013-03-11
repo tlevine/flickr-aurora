@@ -6,6 +6,9 @@ current auroras.
     # Set your credentials
     export FLICKR_KEY=12345abcde...
 
+    # Create schema
+    sqlite3 aurora.db < schema.sql
+
     # Download
     ./run
 
