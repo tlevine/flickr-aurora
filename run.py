@@ -1,5 +1,6 @@
 #!/usr/bin/env python2
 import os
+import datetime
 from requests import get
 from lxml.etree import fromstring
 
@@ -36,7 +37,7 @@ def parse(text):
     if stat != 'ok':
         raise ValueError(stat)
 
-    page = int(rsp.xpath('//photos/page')[0])
+    page = int(rsp.xpath('//photos/@page')[0])
     photos = []
     for i, photo in enumerate(rsp.xpath('//photo')):
         photos.append({
@@ -46,7 +47,7 @@ def parse(text):
             'owner': photo.xpath('@owner')[0],
             'title': photo.xpath('@title')[0],
             'ownername': photo.xpath('@ownername')[0],
-            'dateadded': datetime.datetime.fromtimestamp(photo.xpath('@dateadded')[0]),
+            'dateadded': datetime.datetime.fromtimestamp(int(photo.xpath('@dateadded')[0])),
         })
 
     return photos

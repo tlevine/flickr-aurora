@@ -32,4 +32,5 @@ expected_data = [
     }
 ]
 
-n.assert_list_equal(observed_data, expected_data)
+def test_perfect_data_match():
+    n.assert_list_equal(observed_data, expected_data)
