@@ -51,3 +51,40 @@ def parse(text):
         })
 
     return photos
+
+def group(dt, group_id, verbose = False):
+    'Download a group.'
+    if not os.path.isdir(group):
+        os.mkdir(group)
+
+    n_pages = 1
+    n_page = 1
+    while n_page <= n_pages:
+
+        # Acquire
+        text = download(group_id, n_page)
+        data = parse(text)
+        for row in data:
+            row['group_id'] = group_id
+
+        # Save
+        dt.insert(data, 'photo')
+
+        # Continue
+        photos = fromstring(text).xpath('//photos')[0]
+        n_page = int(photos.xpath('@page')[0])
+        n_pages = int(photos.xpath('@pages')[0])
+        if verbose:
+            print('Downloaded page %d of %d' % (n_page, n_pages))
+        n_page += 1
+
+
+def main():
+    # Make directories.
+    dt = DumpTruck(dbname = 'aurora.db')
+    for group_id in groups:
+        group(dt, group_id)
+
+
+if __name__ == '__main__':
+    main()
