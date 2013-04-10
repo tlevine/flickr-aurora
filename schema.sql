@@ -12,12 +12,15 @@ CREATE TABLE photo (
 
   -- Special fields
   datetaken DATETIME,
-  dateuploaded DATETIME,
   description TEXT NOT NULL,
   url_sq TEXT NOT NULL,
   url_l TEXT NOT NULL,
   longitude REAL,
   latitude REAL,
+
+  -- This one is always null.
+  -- dateuploaded DATETIME,
+
   UNIQUE(group_id, page, within_page)
 );
 
